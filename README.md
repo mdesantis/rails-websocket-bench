@@ -17,3 +17,9 @@ RAILS_ENV=production bundle exec rails assets:precompile
 ```bash
 foreman start -e .env.production,.env.actioncable -f Procfile.actioncable
 ```
+
+### Start with AnyCable as Websocket server
+
+```bash
+foreman start -e .env.production,.env.anycable -f Procfile.anycable
+```
