@@ -1,24 +1,19 @@
-# README
+# Rails Websocket Bench
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+```bash
+bundle install
+yarn install
+RAILS_ENV=production bundle exec rails db:create
+RAILS_ENV=production bundle exec rails db:migrate
+RAILS_ENV=production bundle exec rails assets:precompile
+```
 
-Things you may want to cover:
+## Start the bench application
 
-* Ruby version
+[`Foreman`](https://github.com/ddollar/foreman) is used in order to ease processes management with Procfiles.
 
-* System dependencies
+### Start with ActionCable as Websocket server
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```bash
+foreman start -e .env.production,.env.actioncable -f Procfile.actioncable
+```
