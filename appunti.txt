@@ -1,0 +1,59 @@
+# Rails Websocket Bench
+
+tsung su ubuntu:
+
+per i grafici l'errore che non trova tsung_stats.pl
+
+```sh
+export PATH=/usr/lib/x86_64-linux-gnu/tsung/bin:$PATH
+```
+
+```fish
+set -gx PATH /usr/lib/x86_64-linux-gnu/tsung/bin $PATH
+```
+
+a un certo punto tsung e Rails vanno in 500 per troppi file aperti; ci va questo nello script di avvio della shell:
+
+
+```bash
+ulimit -n 1048576
+```
+
+nella rails app tocca mettere `config.action_cable.allowed_request_origins = [/.*/]` per un bug di tsung
+
+Far partire la Rails app che funge da bench:
+
+```bash
+RAILS_ENV=production bundle exec rails assets:precompile
+
+# Start Rails using ActionCable
+foreman start -e .env.production,.env.actioncable -f Procfile.actioncable
+
+# Start Rails using Anycable
+foreman start -e .env.production,.env.anycable -f Procfile.anycable
+```
+
+Far partire tsung:
+
+tsung -f tsung.xml -k start
+
+tsung sarà a questo punto sulla http://localhost:8091/
+
+superare il cap di 30000 utenti connessi contemporaneamente:
+
+cat /etc/sysctl.conf
+
+net.ipv4.tcp_tw_reuse = 1
+net.ipv4.tcp_tw_recycle = 1
+net.ipv4.ip_local_port_range = 1024 65000
+fs.file-max = 65000
+
+cat /etc/security/limits.conf
+
+*    soft nofile 1048576
+*    hard nofile 1048576
+
+
+sysctl -p
+
+http://tsung.erlang-projects.org/user_manual/faq.html
