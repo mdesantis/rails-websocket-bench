@@ -2,7 +2,9 @@
 
 ## Introduction
 
-Quando è uscito ActionCable mi è venuta la curiosità di capire quanto il server WebSocket incluso in Rails potesse essere performante, dato che Ruby non è notoriamente conosciuto per la sua scalabilità. Curiosando su internet mi sono imbattuto in AnyCable, un'alternativa ad ActionCable creata per qualche ragione. Per cui mi sono chiesto: e se fosse una ragione di performance? Andiamo a scoprirlo insieme!
+I'm a long time Ruby developer. When [ActionCable](https://guides.rubyonrails.org/action_cable_overview.html) was released, the first things that came to mind was: ["will it perf?"](https://www.youtube.com/watch?v=lAl28d6tbko), given that Ruby has never been recognized for its ability with concurrency management, and that Rails has never been recognized for its lightness.
+
+Browsing about, I stumbled on [AnyCable](https://github.com/anycable/anycable), an alternative to ActionCable created for some reason. What if that reason is performance? Let's discover it together!
 
 ### Come funziona ActionCable
 
@@ -10,7 +12,7 @@ ActionCable praticamente è un web server che parte parallelamente a quello che 
 
 ### Come funziona AnyCable
 
-Come per ActionCable, la connessione weboscket è gestita da un weboscket server scritto in Ruby, che però invece di implementare la parte IO di invio e ricezione messaggi la forwarda tramite gRPC ad un server compatibile, che comunicando tramite gRPC può essere scritto in qualsiasi altro linguaggio. Al momento sono due le implementazioni ufficiali, quella in go https://github.com/anycable/anycable-go e quella in erlang https://github.com/anycable/erlycable.
+Come per ActionCable, la connessione websocket è gestita da un websocket server scritto in Ruby, che però invece di implementare la parte IO di invio e ricezione messaggi la forwarda tramite gRPC ad un server compatibile, che comunicando tramite gRPC può essere scritto in qualsiasi altro linguaggio. Al momento sono due le implementazioni ufficiali, quella in go https://github.com/anycable/anycable-go e quella in erlang https://github.com/anycable/erlycable.
 
 Per dettagli riguardo al'architettura di AnyCable consiglio di leggere i seguenti post (che sono linkati anche nel README di AnyCable):
 
@@ -70,20 +72,13 @@ Overcome OS caps
         *    soft nofile 1048576
         *    hard nofile 1048576
 
-a un certo punto tsung e Rails vanno in 500 per troppi file aperti; ci va questo nello script di avvio della shell:
-
-
-```bash
-ulimit -n 1048576
-```
-
-
+Reboot (or reload the configuration files changed, but I don't know how to do :) ) and everything should be fine
 
 ## Benchmarks
 
 ## Conclusion
 
-
+ActionCable è quindi limitato riguardo il numero di utenti che può sopportare, che comunque non è basso, e può andare bene per i siti che aprono connessioni websocket solo per un numero limitato di utenti, come per esempio solo per la sezione admin. Se però la vostra applicazione tira su molte connessioni websocket AnyCable is a perfectly viable option.
 
 
 
