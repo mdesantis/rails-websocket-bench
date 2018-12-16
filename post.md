@@ -4,21 +4,15 @@
 
 I'm a long time Ruby developer. When [ActionCable](https://guides.rubyonrails.org/action_cable_overview.html) was released, the first things that came to mind was: ["will it perf?"](https://www.youtube.com/watch?v=lAl28d6tbko), given that Ruby has never been recognized for its ability with concurrency management, and that Rails has never been recognized for its lightness.
 
-Browsing about, I stumbled on [AnyCable](https://github.com/anycable/anycable), an alternative to ActionCable created for some reason. What if that reason is performance? Let's discover it together!
+Browsing around, I stumbled upon [AnyCable](https://github.com/anycable/anycable), an alternative to ActionCable created for some reason. What if that reason is performance? Let's find out!
 
-### Come funziona ActionCable
+### How ActionCable works
 
-ActionCable praticamente è un web server che parte parallelamente a quello che gestisce le richieste HTTP sfruttando una Rack API hijack, che consente di gestire completamente la IO'object della connessione websocket. La gestione dell'IO object è implementata completamente in Ruby.
+ActionCable runs in a application server instance unconnected separate from the one that handles the standard HTTP requests. It uses the `hijack` API, a Rack API added specifically for sessions requiring evented IO, like Server-Sent Events and WebSockets, giving to the application the whole control of the socket. Within ActionCable, the WebSocket management is fully implemented in Ruby.
 
-### Come funziona AnyCable
+### How AnyCable works
 
-Come per ActionCable, la connessione websocket è gestita da un websocket server scritto in Ruby, che però invece di implementare la parte IO di invio e ricezione messaggi la forwarda tramite gRPC ad un server compatibile, che comunicando tramite gRPC può essere scritto in qualsiasi altro linguaggio. Al momento sono due le implementazioni ufficiali, quella in go https://github.com/anycable/anycable-go e quella in erlang https://github.com/anycable/erlycable.
-
-Per dettagli riguardo al'architettura di AnyCable consiglio di leggere i seguenti post (che sono linkati anche nel README di AnyCable):
-
- - https://evilmartians.com/chronicles/AnyCable-actioncable-on-steroids
-
- - https://medium.com/@leshchuk/from-action-to-any-1e8d863dd4cf
+Like for ActionCable, AnyCable receives and sends messages with a Ruby application, but the socket management is forwarded via gRPC to a server compatible to AnyCable specifications, which can be written in any language that communicates via gRPC. Currently, the official implementations are [AnyCable-Go](https://github.com/anycable/anycable-go), written in Go, and [ErlyCable](https://github.com/anycable/erlycable), written in Erlang. For details about AnyCable architecture I recommend reading the AnyCable ReadMe and the related posts linked there.
 
 ## Setup
 
