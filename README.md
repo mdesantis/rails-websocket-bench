@@ -23,3 +23,9 @@ foreman start -e .env.production,.env.actioncable -f Procfile.actioncable
 ```bash
 foreman start -e .env.production,.env.anycable -f Procfile.anycable
 ```
+
+## Start the test suite
+
+```bash
+tsung -f tsung.xml -k start
+```
