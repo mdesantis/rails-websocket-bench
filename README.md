@@ -6,6 +6,8 @@ yarn install
 RAILS_ENV=production bundle exec rails db:create
 RAILS_ENV=production bundle exec rails db:migrate
 RAILS_ENV=production bundle exec rails assets:precompile
+curl -Lo bin/anycable-go https://github.com/anycable/anycable-go/releases/download/v0.5.4/anycable-go-0.5.4-linux-amd64 && \
+  chmod +x bin/anycable-go
 ```
 
 ## Start the bench application
