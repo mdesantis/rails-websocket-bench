@@ -26,7 +26,7 @@ We are going to load test ActionCable and AnyCable with [Tsung](https://www.proc
 
  - Ruby: 2.5.3
 
- - Rails: 5.2.2
+ - Rails (along with ActionCable): 5.2.2
 
  - AnyCable: 0.5.2
 
@@ -76,6 +76,15 @@ On `http://localhost:8091/es/ts_web:graph` image paths are broken
 ## Benchmarks
 
 Enough talking! Let's see the pictures:
+
+### ActionCable
+
+![ActionCable maximum simultaneous users](benchmark-results/actioncable/maximum-simultaneous-users.png)
+![ActionCable errors rate](benchmark-results/actioncable/errors-rate.png)
+
+### AnyCable
+
+![AnyCable maximum simultaneous users](benchmark-results/anycable/maximum-simultaneous-users.png)
 
 ## Conclusions
 
