@@ -65,7 +65,13 @@ Overcome OS caps
         *    soft nofile 1048576
         *    hard nofile 1048576
 
-Reboot or reload the configuration and everything should be fine.
+Reboot or reload the configuration and everything should be fine
+
+On `http://localhost:8091/es/ts_web:graph` image paths are broken
+: Run the following JavaScript code in your browser console:
+
+        const prependSlash = (_i, attr) => (attr.charAt(0) !== '/') ? `/${attr}` : undefined
+        $('.graph').attr('src', prependSlash).closest('a').attr('href', prependSlash)
 
 ## Benchmarks
 
