@@ -5,7 +5,7 @@
 ```bash
 RAILS_ENV=production bin/setup
 RAILS_ENV=production bundle exec rails assets:precompile
-curl -Lo bin/anycable-go https://github.com/anycable/anycable-go/releases/download/v0.5.4/anycable-go-0.5.4-linux-amd64 && \
+curl -Lo bin/anycable-go https://github.com/anycable/anycable-go/releases/download/v0.6.0/anycable-go-v0.6.0-linux-amd64 && \
   chmod +x bin/anycable-go
 ```
 

@@ -30,7 +30,7 @@ We are going to load test ActionCable and AnyCable with [Tsung](https://www.proc
 
  - AnyCable: 0.5.2
 
- - AnyCable-Go: 0.5.4
+ - AnyCable-Go: 0.6.0
 
  - Load testing: Tsung 1.7.0
 
