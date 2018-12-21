@@ -2,7 +2,7 @@
 
 ## Introduction
 
-I'm a long time Ruby on Rails developer. When [ActionCable](https://guides.rubyonrails.org/action_cable_overview.html) was released, the first things that came to mind was: "[will it perf?](https://www.youtube.com/watch?v=lAl28d6tbko)", given that Ruby has never been recognized for its ability with concurrency management, and that Rails has never been recognized for its lightness.
+I'm a long time Ruby on Rails developer. When [ActionCable](https://guides.rubyonrails.org/action_cable_overview.html) was released, the first thing that came to mind was: "[will it perf?](https://www.youtube.com/watch?v=lAl28d6tbko)", given that Ruby has never been recognized for its ability with concurrency management, and that Rails has never been recognized for its lightness.
 
 Browsing around, I stumbled upon [AnyCable](https://github.com/anycable/anycable), an alternative to ActionCable created for some reason. What if that reason is performance? Let's find out!
 
@@ -22,7 +22,7 @@ We are going to load test ActionCable and AnyCable with [Tsung](https://www.proc
 
  - CPU: Intel i7-2600K
 
- - OS: Ubuntu 16.04.5
+ - OS: Ubuntu 18.04.1
 
  - Ruby: 2.5.3
 
@@ -44,7 +44,7 @@ I wrote two Procfile configurations respectively for [ActionCable](Procfile.acti
 
  - `tsung -f tsung.xml -k start`
 
- Tsung will write its results in the `~/.tsung`, and serve them live at http://localhost:8091/.
+ Tsung will write its results in the `~/.tsung` directory, and serve them live at http://localhost:8091/.
 
 ### Caveats
 
@@ -58,9 +58,8 @@ Overcome OS caps
 : - Add the following to `/etc/sysctl.conf`:
 
         net.ipv4.tcp_tw_reuse = 1
-        net.ipv4.tcp_tw_recycle = 1
         net.ipv4.ip_local_port_range = 1024 65000
-        fs.file-max = 65000
+        fs.file-max = 2097152
 : - Add the following to `/etc/security/limits.conf`:
 
         *    soft nofile 1048576
@@ -69,6 +68,8 @@ Overcome OS caps
 Reboot or reload the configuration and everything should be fine.
 
 ## Benchmarks
+
+Enough talking! Let's see the pictures:
 
 ## Conclusions
 
