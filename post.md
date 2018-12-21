@@ -26,7 +26,7 @@ We are going to load test ActionCable and AnyCable with [Tsung](https://www.proc
 
  - Ruby: 2.5.3
 
- - Rails: 5.2.1
+ - Rails: 5.2.2
 
  - AnyCable: 0.5.2
 
