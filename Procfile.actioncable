@@ -1,2 +1,2 @@
 web: bundle exec puma -C config/puma.rb
-cable: bin/cable
+cable: bundle exec puma -C cable/config/puma.rb cable/config.ru

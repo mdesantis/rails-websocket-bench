@@ -8,7 +8,7 @@ gem 'rails', '~> 5.2.0'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 3.11', require: false
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -26,6 +26,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'redis', '~> 4.0'
 #  AnyCable Rails integration
 gem 'anycable-rails'
+# Use Iodine as the app server
+gem 'iodine', '~> 0.7', require: false
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
